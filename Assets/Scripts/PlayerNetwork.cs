@@ -8,6 +8,7 @@ public class PlayerNetwork : NetworkBehaviour {
    
     private void update()  {
         if (!IsOwner) return;
+        
 
         Vector3 moveDir = new Vector3(0, 0, 0);
 
