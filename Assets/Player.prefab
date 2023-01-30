@@ -107,13 +107,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208223046049321260}
-  - component: {fileID: -5112051692102804683}
   - component: {fileID: 1208223046049321261}
-  - component: {fileID: 8595978763919715147}
-  - component: {fileID: 1659918325303748016}
+  - component: {fileID: 3367425210752223197}
+  - component: {fileID: 7384252778861944113}
+  - component: {fileID: 3888833510061009296}
+  - component: {fileID: 8555413375180958756}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,18 +135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5112051692102804683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208223046049321250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a737297041ba70040bf705f115a69471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1208223046049321261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +151,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!54 &8595978763919715147
+--- !u!54 &3367425210752223197
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +167,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1659918325303748016
+--- !u!114 &7384252778861944113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208223046049321250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a737297041ba70040bf705f115a69471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 80
+  _maxVelocity: 10
+  _rotationSpeed: 450
+--- !u!114 &3888833510061009296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,3 +208,15 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &8555413375180958756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208223046049321250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
