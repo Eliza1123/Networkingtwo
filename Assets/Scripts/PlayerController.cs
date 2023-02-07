@@ -1,67 +1,67 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// Just a crappy character controller for the video
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-
-    public float speed;
-    public float turnSpeed;
-    public float gravityMultiplier;
-
-    private Rigidbody rb;
-
-    // Start is called before the first frame update!
-    void Awake()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        
-
+        _rb = GetComponent<Rigidbody>();
+        _cam = Camera.main;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        Accelerate();
-        Turn();
-        Fall();
+       
+        _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
 
-    void Accelerate()
+    private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        HandleMovement();
+        HandleRotation();
+    }
+
+    #region Movement
+
+    [SerializeField] private float _acceleration = 80;
+    [SerializeField] private float _maxVelocity = 10;
+    private Vector3 _input;
+    private Rigidbody _rb;
+
+    private void HandleMovement()
+    {
+        _rb.velocity += _input.normalized * (_acceleration * Time.deltaTime);
+        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxVelocity);
+    }
+
+    #endregion
+
+    #region Rotation
+
+    [SerializeField] private float _rotationSpeed = 450;
+    private Plane _groundPlane = new(Vector3.up, Vector3.zero);
+    private Camera _cam;
+
+    private void HandleRotation()
+    {
+        var ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+        if (_groundPlane.Raycast(ray, out var enter))
         {
-            Vector3 forceToAdd = transform.forward;
-            forceToAdd.y = 0;
-            rb.AddForce(forceToAdd * speed * 10);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            Vector3 forceToAdd = -transform.forward;
-            forceToAdd.y = 0;
-            rb.AddForce(forceToAdd * speed * 10);
-        }
+            var hitPoint = ray.GetPoint(enter);
 
-        Vector3 locVel = transform.InverseTransformDirection(rb.velocity);
-        locVel = new Vector3(0, locVel.y, locVel.z);
-        rb.velocity = new Vector3(transform.TransformDirection(locVel).x, rb.velocity.y, transform.TransformDirection(locVel).z);
-    }
+            var dir = hitPoint - transform.position;
+            var rot = Quaternion.LookRotation(dir);
 
-    void Turn()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddTorque(-Vector3.up * turnSpeed * 10);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddTorque(Vector3.up * turnSpeed * 10);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _rotationSpeed * Time.deltaTime);
         }
     }
 
-    void Fall()
-    {
-        rb.AddForce(Vector3.down * gravityMultiplier * 10);
-    }
+    #endregion
 }
