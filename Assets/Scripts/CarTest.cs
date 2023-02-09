@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
 /// Just a crappy character controller for the video
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class CarTest : MonoBehaviour
 {
     private void Awake()
     {
