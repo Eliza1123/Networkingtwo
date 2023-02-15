@@ -25,8 +25,9 @@ public class CarTest : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleRotation();
+        Acceleration();
+        Turn();
+        Fall();
     }
 
     #region Movement
@@ -36,7 +37,7 @@ public class CarTest : MonoBehaviour
     private Vector3 _input;
     private Rigidbody _rb;
 
-    private void HandleMovement()
+    private void Acceleration()
     {
         _rb.velocity += _input.normalized * (_acceleration * Time.deltaTime);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxVelocity);
@@ -50,7 +51,7 @@ public class CarTest : MonoBehaviour
     private Plane _groundPlane = new(Vector3.up, Vector3.zero);
     private Camera _cam;
 
-    private void HandleRotation()
+    private void Turn()
     {
         var ray = _cam.ScreenPointToRay(Input.mousePosition);
 
@@ -63,6 +64,15 @@ public class CarTest : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _rotationSpeed * Time.deltaTime);
         }
+    }
+
+    #endregion
+
+    #region Fall
+
+    private void Fall()
+    {
+
     }
 
     #endregion

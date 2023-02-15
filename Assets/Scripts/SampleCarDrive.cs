@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CarDrive : MonoBehaviour
+public class SampleCarDrive : MonoBehaviour
 {
     public float speed;
     public float turnSpeed;
